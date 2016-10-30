@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
+using System;
 
 public class Test : MonoBehaviour {
+
+    public GameObject map;
 
 	// Use this for initialization
 	void Start () {
@@ -33,6 +37,39 @@ public class Test : MonoBehaviour {
         //Output
         print("Search length" + search.path.Count + "\n");
         print("Iterartions" + search.iter + "\n");
+
+        resetMap(graph);
+
+        //Color our path
+        foreach(var node in search.path)
+        {
+            getImage(node.lbl).color = Color.red;
+        }
+    }
+
+    //Get image of the game object
+    Image getImage(string lbl)
+    {
+        //Convert the label into a number
+        var id = Int32.Parse(lbl);
+        //Get a reference to the game object
+        var go = map.transform.GetChild(id).gameObject;
+
+        //Return the image component
+        return go.GetComponent<Image>();
+    }
+
+    //Reset colors of the map
+    void resetMap(Graph graph)
+    {
+        //For each node in our graph
+        foreach(var node in graph.nodes)
+        {
+            //Check if the node is open or solid
+            //Open is grey
+            //Solid is white
+            getImage(node.lbl).color = node.adj.Count == 0 ? Color.white : Color.gray;
+        }
     }
 	
 	// Update is called once per frame
