@@ -28,5 +28,50 @@ public class Graph
             //Set the node in the current position
             nodes[i] = node;
         }
+
+        //Iterate through rows
+        for (var r = 0; r < rows; r++)
+        {
+            //Iterate through cols
+            for (var c = 0; c < cols; c++)
+            {
+                //Get the node reference
+                var node = nodes[cols * r + c];
+
+                //Test the grid
+                //1 solid
+                //0 open
+                if(grid[r,c] == 1)
+                {
+                    //Skip current iteration
+                    continue;
+                }
+
+                //Up direction
+                if (r > 0)
+                {
+                    //Add nodes above current
+                    node.adj.Add(nodes[cols * (r - 1) + c]);
+                }
+
+                //Right direction
+                if (c < cols - 1)
+                {
+                    node.adj.Add(nodes[cols * r + c + 1]);
+                }
+
+                //Down Direction
+                if (r < rows - 1)
+                {
+                    node.adj.Add(nodes[cols * (r + 1) + c]);
+                }
+
+                //Left Direction
+                if (c > 0)
+                {
+                    node.adj.Add(nodes[cols * r + c - 1]);
+                }
+            }
+        }
     }
 }
