@@ -48,4 +48,23 @@ public class Search
             graph.nodes[i].Clear();
         }
     }
+
+    //Test the nodes
+    public void Step()
+    {
+        //If we have a path, leave
+        if(path.Count > 0)
+        {
+            return;
+        }
+
+        //No more options
+        if(possible.Count == 0)
+        {
+            isDone = true;
+            return;
+        }
+
+        iter++;
+    }
 }
