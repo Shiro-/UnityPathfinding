@@ -13,6 +13,7 @@ namespace Pathfinding.Core
         //Keeping track of the nodes
         public Node[] Nodes { get; set; }
 
+
         private int[,] _grid;
 
         /// <summary>
@@ -21,7 +22,7 @@ namespace Pathfinding.Core
         public Graph(int[,] grid)
         {
             _grid = grid;
-            Rows = _grid.GetLength(0);
+            Rows = _grid.GetLength(0); //Array dimension
             columns = _grid.GetLength(1);
 
             //Node data
@@ -34,6 +35,9 @@ namespace Pathfinding.Core
             LoopThroughRows();
         }       
 
+        /// <summary>
+        /// <para>Loop through all avaliables espaces</para>
+        /// </summary>
         private void LoopThroughSpaces()
         {
             //Loop through all the spaces
@@ -41,8 +45,10 @@ namespace Pathfinding.Core
             {
                 //Node for the array
                 var node = new Node();
-                //Label
-                node.NodeName = i.ToString();
+
+                //Label or Node ID
+                node.NodeID = i.ToString();
+
                 //Set the node in the current position
                 Nodes[i] = node;
             }           
@@ -97,9 +103,14 @@ namespace Pathfinding.Core
             }
         }
 
-        private void AddNodes(INode nodeInstance, Node node)
+        /// <summary>
+        /// <para>Nodes who will create the walk path</para>
+        /// </summary>
+        /// <param name="nodeInstance"><para>Node object instance</para></param>
+        /// <param name="node"><para>Node to add</para></param>
+        private void AddNodes(INode<Node> nodeInstance, Node node)
         {
-            nodeInstance.Nodes.Add(node);
+            nodeInstance.AdjacentsNodes.Add(node);
         }
 
     }

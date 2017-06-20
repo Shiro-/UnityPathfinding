@@ -7,7 +7,7 @@ namespace Pathfinding.Core
     class Search
     {
         //Reference to a graph
-        public IGraph graph;
+        public IGraph _graph;
 
         //Keep track of our nodes
         public List<Node> possible;
@@ -23,7 +23,7 @@ namespace Pathfinding.Core
         //Search class
         public Search(IGraph graph)
         {
-            this.graph = graph;
+            this._graph = graph;
         }
 
         //Start for indicating our start and end
@@ -45,10 +45,10 @@ namespace Pathfinding.Core
             iterator = 0;
 
             //Go through the graph and clear out the nodes
-            for (var i = 0; i < graph.Nodes.Length; i++)
+            for (var i = 0; i < _graph.Nodes.Length; i++)
             {
                 //Get the node and clear it
-                graph.Nodes[i].ClearNode();
+                _graph.Nodes[i].ClearNode();
             }
         }
 
@@ -95,9 +95,9 @@ namespace Pathfinding.Core
             visited.Add(node);
 
             //Iterate through adj nodes
-            for (var i = 0; i < node.Nodes.Count; i++)
+            for (var i = 0; i < node.AdjacentsNodes.Count; i++)
             {
-                addAdj(node, node.Nodes[i]);
+                addAdj(node, node.AdjacentsNodes[i]);
             }
         }
 

@@ -3,21 +3,25 @@
 
 using UnityEngine;
 using System.Collections.Generic;
+using System;
+
 namespace Pathfinding.Core
 {
-    public class Node: INode
+    public class Node : INode<Node>
     {
         //List for the nodes
-        public List<Node> Nodes { get; set; }
+        public List<Node> AdjacentsNodes { get; set; }
         public Node PreviusNode { get; set; }
+
         //Name for nodes
-        public string NodeName { get; set; }
+        public string NodeID { get; set; }
+        public bool IsWalkable { get; set; }
 
         public Node()
         {
-            Nodes = new List<Node>();
+            AdjacentsNodes = new List<Node>();
             PreviusNode = null;
-            NodeName = "";
+            NodeID = "";
         }
 
         //Clear the node

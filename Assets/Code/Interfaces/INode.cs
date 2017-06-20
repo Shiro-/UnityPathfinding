@@ -5,11 +5,12 @@ using System.Text;
 
 namespace Pathfinding.Core
 {
-    interface INode
+    interface INode<T>
     {
-        List<Node> Nodes { get; set; }
-        Node PreviusNode { get; set; }
-        string NodeName { get; set; }
+        List<T> AdjacentsNodes { get; set; }
+        T PreviusNode { get; set; }
+        bool IsWalkable { get; set; }
+        string NodeID { get; set; }
         void ClearNode();
     }
 }

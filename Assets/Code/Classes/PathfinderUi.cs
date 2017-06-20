@@ -38,7 +38,7 @@ namespace Pathfinding.Ui
                 //Check if the node is open or solid
                 //Open is grey
                 //Solid is white
-                GetImage(node.NodeName).color = node.Nodes.Count == 0 ? Color.white : Color.gray;
+                GetImage(node.NodeID).color = node.AdjacentsNodes.Count == 0 ? Color.white : Color.gray;
             }
         }
     }

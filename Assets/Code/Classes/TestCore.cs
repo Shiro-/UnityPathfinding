@@ -18,8 +18,6 @@ namespace Pathfinding.Core
         {            
             MapCreator();
             ObjectInitialization();
-
-
             //Step through each solution
             while (!_search.isDone)
             {
@@ -27,6 +25,21 @@ namespace Pathfinding.Core
             }
 
             ImagesColouring();
+        }
+
+        /// <summary>
+        /// <para>Create a grid for our test</para>
+        /// </summary>
+        private void MapCreator() //This need be created Automatically depending of the environment (TODO)
+        {
+            _mapGrid = new int[5, 5]
+            {
+               {0, 1, 0, 0, 0},
+               {0, 1, 1, 0, 0}, //Like the images in unity!
+               {0, 1, 1, 0, 0},
+               {0, 1, 1, 0, 0},
+               {0, 0, 0, 0, 0}
+            };
         }
 
         /// <summary>
@@ -57,20 +70,6 @@ namespace Pathfinding.Core
             BeginSearch(_graph);
         }
 
-        /// <summary>
-        /// <para>Create a grid for our test</para>
-        /// </summary>
-        private void MapCreator() //This need be created Automatically depending on the environment (TODO)
-        {
-            _mapGrid = new int[5, 5]
-            {
-               {0, 1, 0, 0, 0},
-               {0, 1, 1, 0, 0}, //Like the images in unity!
-               {0, 1, 1, 0, 0},
-               {0, 1, 1, 0, 0},
-               {0, 0, 0, 0, 0}
-            };
-        }
 
         /// <summary>
         /// <para>Start the search and give it two nodes</para>
@@ -81,10 +80,10 @@ namespace Pathfinding.Core
             _search.Start(_graph.Nodes[0], _graph.Nodes[10]);
                           //StartNode     //End Node
         }        
+
         private void ImagesColouring()
         {
             ConsoleOutput();
-
 
             var pathfinderUi = new Ui.PathfinderUi();
         
@@ -102,7 +101,7 @@ namespace Pathfinding.Core
             
             foreach (var node in _search.path)
             {
-                ui.GetImage(node.NodeName).color = Color.red;
+                ui.GetImage(node.NodeID).color = Color.red;
             }
         }
 
